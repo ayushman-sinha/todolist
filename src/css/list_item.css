@@ -36,7 +36,8 @@
     justify-content: center;
     padding: auto 40px auto 40px;
     position: relative;
-    margin-top: 10px;    
+    margin-top: 10px;   
+
 }
 .editOff{
     display: flex;
@@ -74,5 +75,6 @@
     margin-top: 20px;
     width: 100%;
     height:100px;
-   
+    overflow: auto;
+    resize: vertical;
 }
