@@ -5,6 +5,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { CiCircleMore } from "react-icons/ci";
 import {IoCheckmarkSharp} from 'react-icons/io5'
 import {IoCloseCircleSharp} from 'react-icons/io5'
+import { IoCheckmark } from 'react-icons/io5';
 const ListItem = (props) => {
     const [showMore, setShowMore] = useState(false); // To display more text 
     const [edit, setEdit] = useState(false); // To edit the text
@@ -12,6 +13,7 @@ const ListItem = (props) => {
     const [textEdit, setTextEdit] = useState(props.title); // To store the final text
     const [moreText, setMoreText] = useState(''); // To store the more text
     const [moreTextEdit, setMoreTextEdit] = useState('No text to show'); // To store the final more text
+    const [taskCompleted, setTaskCompleted] = useState(false); // To store the final more text
     const handleEdit = (e) => {  
         //console.log('edit')     
         setEdit(!edit);
@@ -36,8 +38,11 @@ const ListItem = (props) => {
          props.deleteItem(props.id);
         //console.log("id",props.id)
     }
+    const handleComplete = (e) => {
+        setTaskCompleted(!taskCompleted);
+    }
   return (
-    <div class = 'todo_list_item'>
+    <div class = 'todo_list_item' style={{backgroundColor: taskCompleted ? `rgba(48, 226, 81, 0.605)`: `rgba(238, 238, 238, 0.158)`}}>
         
         <div class='normal_text'>            
             {edit ? 
@@ -50,9 +55,11 @@ const ListItem = (props) => {
             <div class='editOff'>
                 <div class = 'item_title'>{textEdit}</div>
                 <div class='edit_delete'>            
-                    <button class = 'item_button' onClick={handleEdit} ><FaEdit size='40px' class='item_button_edit' /></button>
-                    <button class = 'item_button' onClick={(e)=>{handleDelete()}}><FaTrashAlt size='35px' class='item_button_edit'/></button>
-                    <button class = 'item_button' onClick={(e)=>setShowMore(!showMore)} ><CiCircleMore size='40px' class='item_button_edit' /></button>
+                <button class = 'item_button_complete' onClick={handleComplete} ><IoCheckmarkSharp size='50px' class='item_button_edit' /></button>
+                    <button class = 'item_button' onClick={handleEdit} ><FaEdit size='35px' class='item_button_edit' /></button>
+                    <button class = 'item_button' onClick={(e)=>{handleDelete()}}><FaTrashAlt size='30px' class='item_button_edit'/></button>
+                    <button class = 'item_button' onClick={(e)=>setShowMore(!showMore)} ><CiCircleMore size='35px' class='item_button_edit' /></button>
+                    
                 </div>
             </div>
             }        
