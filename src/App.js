@@ -8,12 +8,16 @@ function App() {
   const [title, setTitle] = useState('')
 
   const deleteItem = (id) => {
-    const tmp = listItemArray.filter((item)=>item.id!=id)
-    console.log(tmp)
+    let tmp=[];
+    listItemArray.forEach((item,key) => {
+      if(item.props.id !== id){
+        tmp.push(item)
+      }
+    })
     setListItemArray(tmp)
   }
   const handleAdd = (e) => {
-    const tmp= <ListItem title={title} key={listItemArray.length+1} id={listItemArray.length+1} deleteItem={deleteItem}/>
+    const tmp= <ListItem title={title} key={listItemArray.length} id={listItemArray.length} deleteItem={deleteItem}/>
     setListItemArray([...listItemArray, tmp])
     setTitle('')
   }
