@@ -1,46 +1,52 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './css/body.css';
-import Blob from './Blob';
+
+import { BsFillPlusCircleFill} from "react-icons/bs";
+
 import ListItem from './ListItem';
 function App() {
-  const [listItemArray, setListItemArray] = useState([])
+  let [listItemArray, setListItemArray] = useState([])
   const [title, setTitle] = useState('')
 
-  const deleteItem = (id) => {
-    let tmp=[];
-    listItemArray.forEach((item,key) => {
-      if(item.props.id !== id){
-        tmp.push(item)
-      }
-    })
-    setListItemArray(tmp)
+  const deleteItem = (id) => {   
+    listItemArray.splice(id,1)
+    setListItemArray([...listItemArray])
+    console.log(listItemArray)
+
   }
   const handleAdd = (e) => {
-    const tmp= <ListItem title={title} key={listItemArray.length} id={listItemArray.length} deleteItem={deleteItem}/>
-    setListItemArray([...listItemArray, tmp])
+    if(title==='')
+      return;
+    const key=Math.random()
+   const tmp= <ListItem title={title} key={key} id={key} deleteItem={deleteItem}/>
+   //console.log(listItemArray.length)
+    listItemArray.push(tmp)
+    setListItemArray(listItemArray)
+    //setListItemArray([...listItemArray, tmp])
     setTitle('')
   }
   
 
-  return (
-    <div>
+  return (    
       <div class='main_container'>
         <div class='header'>
-          <h1>Todo List</h1>      
+          <div class='main_title'>Todo List</div>
           <div class = 'add_button' >
-            <input type="text" placeholder="Add a todo" value={title} onChange={(e)=>setTitle(e.target.value)}/>
-            <button onClick={handleAdd}>Add</button>        
+            <input type="text"  class='input_task' placeholder="Add an item.." value={title} onChange={(e)=>setTitle(e.target.value)}/>
+            <button onClick={handleAdd} class='button_edit'><BsFillPlusCircleFill size='30px' class='add_button_edit' /></button>        
           </div>
         </div>
-        {listItemArray.map((item,key) =>   
-            item
-        )}
-
-      
+       
+          {listItemArray.map((item,key) => {
+            return item
+          })
+       }
       </div>
-    </div>
+    
   );
 }
 
 export default App;
+
+
