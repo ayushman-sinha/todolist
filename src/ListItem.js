@@ -7,6 +7,7 @@ import {IoCheckmarkSharp} from 'react-icons/io5'
 import {IoCloseCircleSharp} from 'react-icons/io5'
 import { IoCheckmark } from 'react-icons/io5';
 const ListItem = (props) => {
+
     const [showMore, setShowMore] = useState(false); // To display more text 
     const [edit, setEdit] = useState(false); // To edit the text
     const [text, setText] = useState(''); // To store the text
@@ -14,6 +15,7 @@ const ListItem = (props) => {
     const [moreText, setMoreText] = useState(''); // To store the more text
     const [moreTextEdit, setMoreTextEdit] = useState('No text to show'); // To store the final more text
     const [taskCompleted, setTaskCompleted] = useState(false); // To store the final more text
+
     const handleEdit = (e) => {  
         //console.log('edit')     
         setEdit(!edit);
@@ -41,6 +43,7 @@ const ListItem = (props) => {
         props.completeItem(props.id);
         setTaskCompleted(!taskCompleted);
     }
+
   return (
     <div class = 'todo_list_item' style={{backgroundColor: props.completed ? `rgba(48, 226, 81, 0.605)`: `rgba(238, 238, 238, 0.158)`}}>
         
@@ -67,8 +70,7 @@ const ListItem = (props) => {
         </div>
     
           {edit?
-            <textarea class = 'item_edit_more' value={moreText} onChange={(e)=>setMoreText(e.target.value)}  placeholder='Add description...' />
-            :
+            <textarea class = 'item_edit_more' value={moreText} onChange={(e)=>setMoreText(e.target.value)}  placeholder='Add description...' />:
             showMore &&
             <div class = 'more_text' >
             {moreTextEdit}
