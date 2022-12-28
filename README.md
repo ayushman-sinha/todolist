@@ -6,3 +6,7 @@
 - Given application is responsive.
 
 ![image](https://user-images.githubusercontent.com/77104799/209853628-3e53452a-5b9a-4c5e-b676-d4695973f65b.png)
+
+In Mobile Devices : 
+
+![image](https://user-images.githubusercontent.com/77104799/209853787-8021f2a6-7fef-4120-8f66-15269717ca16.png)
