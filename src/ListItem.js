@@ -40,6 +40,7 @@ const ListItem = (props) => {
     }
     const handleComplete = (e) => {
         setTaskCompleted(!taskCompleted);
+        props.completeItem(props.id);
     }
   return (
     <div class = 'todo_list_item' style={{backgroundColor: taskCompleted ? `rgba(48, 226, 81, 0.605)`: `rgba(238, 238, 238, 0.158)`}}>
