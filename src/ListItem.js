@@ -43,7 +43,7 @@ const ListItem = (props) => {
         props.completeItem(props.id);
     }
   return (
-    <div class = 'todo_list_item' style={{backgroundColor: taskCompleted ? `rgba(48, 226, 81, 0.605)`: `rgba(238, 238, 238, 0.158)`}}>
+    <div class = 'todo_list_item' style={{backgroundColor: props.completed ? `rgba(48, 226, 81, 0.605)`: `rgba(238, 238, 238, 0.158)`}}>
         
         <div class='normal_text'>            
             {edit ? 

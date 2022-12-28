@@ -26,41 +26,31 @@ function App() {
       return;
   //   const key=Math.random()
   //  const tmp= <ListItem title={title} key={key} id={key} deleteItem={deleteItem}  completeItem={completeItem}/>
+     let key=Math.random()
     const tmp = {
       title: title,
-      id: Math.random(),
+      key :key,
+      id: key,
       completed: false      
     }   
     setListItemArray([...listItemArray,tmp])
     setTitle('')
   }
   const completeItem = (id) => {
-    let x=listItemArray.map((item) => {
-      return item.id=== id
-    })
-     setListItemArrayCompleted([...listItemArrayCompleted,x])
-    let y = listItemArray.filter((item) => {
-      return item.id !== id
-    })
-    setListItemArrayNotCompleted([...listItemArrayNotCompleted,y])
-  }
-  
-  const handleFilter = () => {
-    // if(filter===2)
-    // {
-    //   let x = listItemArray.filter((item) => {
-    //     return item.completed === true
-    //   })
-    //   setListItemArray([...x])
-    // }
-    // else if(filter===3)
-    // {
-    //   let x = listItemArray.filter((item) => {
-    //     return item.completed === false
-    //   })
-    //   setListItemArray([...x])
-    // }
-    
+    // let x=listItemArray.map((item) => {
+    //   return item.id=== id
+    // })
+    //  setListItemArrayCompleted([...listItemArrayCompleted,x])
+    // let y = listItemArray.filter((item) => {
+    //   return item.id !== id
+    // })
+    // setListItemArrayNotCompleted([...listItemArrayNotCompleted,y])
+    for(let i=0;i<listItemArray.length;i++){
+      if(listItemArray[i].id===id){
+        listItemArray[i].completed=true;
+        break;
+      }
+    }
   }
 
    
@@ -76,9 +66,9 @@ function App() {
                 <div className='filter_dropdown'  style={{display:dropDown?'flex':'none'}}>
                   <div className='filter_dropdown_content'>
                     <ul>
-                      <li onClick={(e)=>{setFilter(1);handleFilter()}}>All</li>
-                      <li onClick={(e)=>{setFilter(2);handleFilter()}}>Completed</li>
-                      <li onClick={(e)=>{setFilter(3);handleFilter()}}> Uncompleted</li>
+                      <li onClick={(e)=>setFilter(1)}>All</li>
+                      <li onClick={(e)=>setFilter(2)}>Completed</li>
+                      <li onClick={(e)=>setFilter(3)}> Uncompleted</li>
                     </ul>                    
                   </div>
                 </div>
@@ -94,11 +84,11 @@ function App() {
        
         {      
           filter===1?listItemArray.map((item) => {
-            return <ListItem title={item.title} key={item.id} id={item.id} deleteItem={deleteItem}  completeItem={completeItem}/>
-          }): filter===2?listItemArrayCompleted.map((item) => {
-            return <ListItem title={item.title} key={item.id} id={item.id} deleteItem={deleteItem}  completeItem={completeItem}/>})
-          :listItemArrayNotCompleted.map((item) => {
-            return <ListItem title={item.title} key={item.id} id={item.id} deleteItem={deleteItem}  completeItem={completeItem}/>})
+            return <ListItem title={item.title} key={item.id} id={item.id} deleteItem={deleteItem}  completeItem={completeItem} completed={item.completed}/>
+          }): filter===2?listItemArray.map((item) => {
+            return  item.completed===true?<ListItem title={item.title} key={item.id} id={item.id} deleteItem={deleteItem}  completeItem={completeItem} completed={item.completed}/>:null})
+          :listItemArray.map((item) => {
+            return  item.completed===false?<ListItem title={item.title} key={item.id} id={item.id} deleteItem={deleteItem}  completeItem={completeItem} completed={item.completed}/>:null})
         }
       </div>
     
