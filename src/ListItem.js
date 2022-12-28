@@ -28,6 +28,7 @@ const ListItem = (props) => {
         setTextEdit(text);// To store the final text
         setEdit(!edit);// Indicate Edit is off       
         setShowMore(false); // Hide more text
+        setMoreTextEdit(moreText); // To store the final more text
        
     }
     const cancelTextEdit = (e) => {
