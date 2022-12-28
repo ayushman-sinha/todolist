@@ -4,3 +4,5 @@
 - Ability to delete a task or mark it as completed.
 - Can filter between all tasks, completed tasks or task yet to be completed.
 - Given application is responsive.
+
+![image](https://user-images.githubusercontent.com/77104799/209853628-3e53452a-5b9a-4c5e-b676-d4695973f65b.png)
