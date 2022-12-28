@@ -1,32 +1,27 @@
 import { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom/client';
 import './css/body.css';
-
 import { BsFillPlusCircleFill} from "react-icons/bs";
 import { FaFilter } from "react-icons/fa";
 
 import ListItem from './ListItem';
 function App() {
-  let [listItemArray, setListItemArray] = useState([])
-  let [listItemArrayCompleted, setListItemArrayCompleted] = useState([])
-  let [listItemArrayNotCompleted, setListItemArrayNotCompleted] = useState([])
-  const [title, setTitle] = useState('')
-  const [dropDown, setDropDown] = useState(false)
-  const [filter, setFilter] = useState(1);
+  let [listItemArray, setListItemArray] = useState([])// To store the list of components
+  const [title, setTitle] = useState('')// To store the title
+  const [dropDown, setDropDown] = useState(false)// To display the dropdown
+  const [filter, setFilter] = useState(1); // To store the filter value
+
 
   const deleteItem = (id) => {   
     let x = listItemArray.filter((item) => {
       return item.id !== id
     })
     setListItemArray([...x])
-
   }
+
   const handleAdd = (e) => {
     if(title==='')
-      return;
-  //   const key=Math.random()
-  //  const tmp= <ListItem title={title} key={key} id={key} deleteItem={deleteItem}  completeItem={completeItem}/>
-     let key=Math.random()
+      return;  
+    let key=Math.random()
     const tmp = {
       title: title,
       key :key,
@@ -36,21 +31,14 @@ function App() {
     setListItemArray([...listItemArray,tmp])
     setTitle('')
   }
-  const completeItem = (id) => {
-    // let x=listItemArray.map((item) => {
-    //   return item.id=== id
-    // })
-    //  setListItemArrayCompleted([...listItemArrayCompleted,x])
-    // let y = listItemArray.filter((item) => {
-    //   return item.id !== id
-    // })
-    // setListItemArrayNotCompleted([...listItemArrayNotCompleted,y])
+  const completeItem = (id) => {    
     for(let i=0;i<listItemArray.length;i++){
       if(listItemArray[i].id===id){
-        listItemArray[i].completed=true;
+        listItemArray[i].completed=!listItemArray[i].completed;
         break;
       }
     }
+    setListItemArray([...listItemArray])
   }
 
    
@@ -60,9 +48,8 @@ function App() {
           <div class='main_title'>Todo List</div>
           <div class = 'add_button' >
             <input type="text"  class='input_task' placeholder="Add an item.." value={title} onChange={(e)=>setTitle(e.target.value)}/>
-            <button onClick={handleAdd} class='button_edit'><BsFillPlusCircleFill size='30px' class='add_button_edit' /></button>  
-            <button class='button_edit'><FaFilter size='30px' class='add_button_edit'  onClick={(e)=>setDropDown(!dropDown)}/>
-            
+            <button onClick={handleAdd}  class='button_edit'><BsFillPlusCircleFill size='30px' class='add_button_edit' /></button>  
+            <button class='button_edit'><FaFilter size='30px' class='add_button_edit'  onClick={(e)=>setDropDown(!dropDown)}/>            
                 <div className='filter_dropdown'  style={{display:dropDown?'flex':'none'}}>
                   <div className='filter_dropdown_content'>
                     <ul>
@@ -72,13 +59,7 @@ function App() {
                     </ul>                    
                   </div>
                 </div>
-                </button>
-                        
-               
-             
-           
-           
-                
+            </button>
           </div>
         </div>
        

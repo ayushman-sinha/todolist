@@ -42,10 +42,12 @@
     font-size: 22px;
     font-weight: 500;
     color: white;
-    
+    font-family: 'Roboto Mono', monospace;
     display: flex;
+
     position: relative;
     flex:3;
+    
 }
 .edit_delete{
     font-size: 20px;
@@ -90,13 +92,14 @@
     
 }
 .item_edit_title{
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 500;
     color: #333;    
     display: flex;
     position: relative;
     margin-right: 20px;
-   
+    font-family: 'Roboto Mono', monospace;
+    padding: 0px 0px 0px 10px;
 }
 .item_edit_more{
     font-size: 18px;
@@ -106,11 +109,12 @@
     position: relative;
     align-self: center;
     margin-top: 20px;
-    width: 100%;
+    width: 95%;
     height:100px;
     overflow: auto;
     resize: vertical;
-      
+    padding: 10px;
+   
 }
 
 .item_button{

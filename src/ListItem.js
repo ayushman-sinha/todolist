@@ -19,15 +19,14 @@ const ListItem = (props) => {
         setEdit(!edit);
         setShowMore(true);
     }
-    const handleTextEdit = (e) => {      
-       
+    const handleTextEdit = (e) => {     
         setText(e.target.value);       
     }
     const saveTextEdit = (e) => {
         setTextEdit(text);// To store the final text
-        setEdit(!edit);// Indicate Edit is off
+        setEdit(!edit);// Indicate Edit is off       
         setShowMore(false); // Hide more text
-        setMoreTextEdit(moreText);// To store the final more text
+       
     }
     const cancelTextEdit = (e) => {
         setEdit(!edit);
@@ -38,9 +37,9 @@ const ListItem = (props) => {
          props.deleteItem(props.id);
         //console.log("id",props.id)
     }
-    const handleComplete = (e) => {
-        setTaskCompleted(!taskCompleted);
+    const handleComplete = (e) => {        
         props.completeItem(props.id);
+        setTaskCompleted(!taskCompleted);
     }
   return (
     <div class = 'todo_list_item' style={{backgroundColor: props.completed ? `rgba(48, 226, 81, 0.605)`: `rgba(238, 238, 238, 0.158)`}}>
@@ -48,7 +47,7 @@ const ListItem = (props) => {
         <div class='normal_text'>            
             {edit ? 
             <div class= 'editOn'>
-                <input  class = 'item_edit_title' type="text" value={text} onChange={handleTextEdit} />
+                <input  class = 'item_edit_title' type="text" value={text} onChange={handleTextEdit}  placeholder='Add title...' />
                 <button class = 'item_button' onClick={saveTextEdit} ><IoCheckmarkSharp size='40px' class='item_button_edit' /></button>
                 <button class = 'item_button' onClick={cancelTextEdit} ><IoCloseCircleSharp size='40px' class='item_button_edit' /></button>
             </div> 
@@ -68,7 +67,7 @@ const ListItem = (props) => {
         </div>
     
           {edit?
-            <textarea class = 'item_edit_more' value={moreText} onChange={(e)=>setMoreText(e.target.value)} />
+            <textarea class = 'item_edit_more' value={moreText} onChange={(e)=>setMoreText(e.target.value)}  placeholder='Add description...' />
             :
             showMore &&
             <div class = 'more_text' >
