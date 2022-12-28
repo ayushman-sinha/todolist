@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './css/body.css';
 
@@ -24,24 +24,46 @@ function App() {
   const handleAdd = (e) => {
     if(title==='')
       return;
-    const key=Math.random()
-   const tmp= <ListItem title={title} key={key} id={key} deleteItem={deleteItem}  completeItem={completeItem}/>
-   //console.log(listItemArray.length)
-    listItemArray.push(tmp)
-    setListItemArray(listItemArray)
-    //setListItemArray([...listItemArray, tmp])
+  //   const key=Math.random()
+  //  const tmp= <ListItem title={title} key={key} id={key} deleteItem={deleteItem}  completeItem={completeItem}/>
+    const tmp = {
+      title: title,
+      id: Math.random(),
+      completed: false      
+    }   
+    setListItemArray([...listItemArray,tmp])
     setTitle('')
   }
   const completeItem = (id) => {
-     for(let i=0;i<listItemArray.length;i++){
-
-     }
+    let x=listItemArray.map((item) => {
+      return item.id=== id
+    })
+     setListItemArrayCompleted([...listItemArrayCompleted,x])
+    let y = listItemArray.filter((item) => {
+      return item.id !== id
+    })
+    setListItemArrayNotCompleted([...listItemArrayNotCompleted,y])
   }
   
   const handleFilter = () => {
+    // if(filter===2)
+    // {
+    //   let x = listItemArray.filter((item) => {
+    //     return item.completed === true
+    //   })
+    //   setListItemArray([...x])
+    // }
+    // else if(filter===3)
+    // {
+    //   let x = listItemArray.filter((item) => {
+    //     return item.completed === false
+    //   })
+    //   setListItemArray([...x])
+    // }
     
   }
 
+   
   return (    
       <div class='main_container'>
         <div class='header'>
@@ -70,10 +92,14 @@ function App() {
           </div>
         </div>
        
-          {listItemArray.map((item,key) => {
-            return item
-          })
-       }
+        {      
+          filter===1?listItemArray.map((item) => {
+            return <ListItem title={item.title} key={item.id} id={item.id} deleteItem={deleteItem}  completeItem={completeItem}/>
+          }): filter===2?listItemArrayCompleted.map((item) => {
+            return <ListItem title={item.title} key={item.id} id={item.id} deleteItem={deleteItem}  completeItem={completeItem}/>})
+          :listItemArrayNotCompleted.map((item) => {
+            return <ListItem title={item.title} key={item.id} id={item.id} deleteItem={deleteItem}  completeItem={completeItem}/>})
+        }
       </div>
     
   );
