@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './css/body.css';
 import { BsFillPlusCircleFill} from "react-icons/bs";
 import { FaFilter } from "react-icons/fa";
+import {MdDelete} from 'react-icons/md'
 
 import ListItem from './ListItem';
 function App() {
@@ -40,7 +41,17 @@ function App() {
     }
     setListItemArray([...listItemArray])
   }
-
+  
+  const handleDeleteAll = (e) => {
+    //To delete all the completed items
+    for(let i=0;i<listItemArray.length;i++){
+      if(listItemArray[i].completed===true){
+        listItemArray.splice(i,1)
+        i--;
+      }
+    }
+    setListItemArray([...listItemArray])
+  }
    
   return (    
       <div class='main_container'>
@@ -49,17 +60,18 @@ function App() {
           <div class = 'add_button' >
             <input type="text"  class='input_task' placeholder="Add an item.." value={title} onChange={(e)=>setTitle(e.target.value)}/>
             <button onClick={handleAdd}  class='button_edit'><BsFillPlusCircleFill size='30px' class='add_button_edit' /></button>  
-            <button class='button_edit'><FaFilter size='30px' class='add_button_edit'  onClick={(e)=>setDropDown(!dropDown)}/>            
+            <button class='button_edit'><FaFilter size='30px' class='add_button_edit'  onClick={(e)=>setDropDown(!dropDown)}/>                          
                 <div className='filter_dropdown'  style={{display:dropDown?'flex':'none'}}>
                   <div className='filter_dropdown_content'>
                     <ul>
-                      <li onClick={(e)=>setFilter(1)}>All</li>
-                      <li onClick={(e)=>setFilter(2)}>Completed</li>
-                      <li onClick={(e)=>setFilter(3)}> Uncompleted</li>
+                      <li onClick={(e)=>{setFilter(1);setDropDown(!dropDown)}}>All</li>
+                      <li onClick={(e)=>{setFilter(2);setDropDown(!dropDown)}}>Completed</li>
+                      <li onClick={(e)=>{setFilter(3);setDropDown(!dropDown)}}> Uncompleted</li>
                     </ul>                    
                   </div>
                 </div>
             </button>
+            <button onClick={handleDeleteAll}  class='button_edit'><MdDelete size='40px' class='add_button_edit' /></button>
           </div>
         </div>
        
